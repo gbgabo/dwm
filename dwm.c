@@ -233,6 +233,7 @@ static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
+static void restart(const Arg *arg);
 
 /* variables */
 static const char broken[] = "broken";
@@ -2146,4 +2147,11 @@ main(int argc, char *argv[])
 	cleanup();
 	XCloseDisplay(dpy);
 	return EXIT_SUCCESS;
+}
+
+void
+restart(const Arg *arg)
+{
+  quit(arg);
+  spawn(arg);
 }
