@@ -6,7 +6,6 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "undefined:size=12", "fontawesome:size=9" };
-static const char dmenufont[]       = "undefinded:size=12";
 static const char col_gray1[]       = "#240041";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#c79bff";
@@ -19,7 +18,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -27,13 +26,14 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      							instance    title       tags mask     isfloating   monitor */
-	{ "Gimp"									,  NULL,       NULL,       0,            1,           -1 },
-	{ "code"									,  NULL,       NULL,       1 << 0,       0,           -1 },
-	{ "quterowser"						,  NULL,       NULL,       1 << 1,       0,           -1 },
-	{ "firefox"								,  NULL,       NULL,       1 << 1,       0,           -1 },
+	{ "Gimp"								,  NULL,       NULL,       0,            1,           -1 },
+	{ "vscodium"							,  NULL,       NULL,       1 << 0,       0,           -1 },
+	{ "quterowser"							,  NULL,       NULL,       1 << 1,       0,           -1 },
+	{ "Brave-browser"						,  NULL,       NULL,       1 << 1,       0,           -1 },
+	{ "Firefox-esr"							,  NULL,       NULL,       1 << 1,       0,           -1 },
 	{ "Zathura"								,  NULL,       NULL,       1 << 2,       0,           -1 },
 	{ "discord"								,  NULL,       NULL,       1 << 3,       0,           -1 },
-	{ "telegram-desktop"			,  NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "telegram-desktop"					,  NULL,       NULL,       1 << 3,       0,           -1 },
 
 };
 
@@ -44,9 +44,9 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
+	{ "",      tile },    /* first entry is default */
+	{ "",      NULL },    /* no layout function means floating behavior */
+	{ "",      monocle },
 };
 
 /* key definitions */
@@ -62,23 +62,23 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "j4-dmenu-desktop", "--dmenu", "dmenu -i -fn undefined", NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
-static const char *tsearchcmd[] = {"tsearch-dmenu", NULL };
-static const char *settingsmenu[] = {"tmenu", "/home/gabo/menus/settings.yaml", NULL };
-static const char *lockcmd[] = {"i3lock-fancy", NULL };
+static const char *dmenucmd[] 		= { "j4-dmenu-desktop", "--dmenu", "dmenu -i -fn undefined", NULL };
+static const char *termcmd[]  		= { "xfce4-terminal", NULL };
+static const char *tsearchcmd[] 	= {"dmenu_tsearch", NULL };
+static const char *settingsmenu[] 	= {"tmenu", "/home/gabo/tmenus/settings.yaml", NULL };
+static const char *lockcmd[] 		= {"i3lock-fancy", NULL };
 
-/* brightness + volume control*/
-static const char *brightnessup[] = {"brightness-ctrlr.sh", "-s", "5+", NULL };
+/* brightness + volume control */
+static const char *brightnessup[] 	= {"brightness-ctrlr.sh", "-s", "5+", NULL };
 static const char *brightnessdown[] = {"brightness-ctrlr.sh", "-s", "5-", NULL };
-static const char *volumeup[] = {"volume-ctrlr.sh", "5%+", NULL };
-static const char *volumedown[] = {"volume-ctrlr.sh", "5%-", NULL };
+static const char *volumeup[] 		= {"volume-ctrlr.sh", "5%+", NULL };
+static const char *volumedown[] 	= {"volume-ctrlr.sh", "5%-", NULL };
 
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,            						XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,            			XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -88,7 +88,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY|ShiftMask,             XK_l,      spawn,       	 {.v = lockcmd } },
+	{ MODKEY|ShiftMask,             XK_l,      spawn,		   {.v = lockcmd } },
 	// { MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
@@ -103,12 +103,11 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_d, 		 spawn,          {.v = tsearchcmd } },
-	{ MODKEY,						            XK_9, 		 spawn,          {.v = settingsmenu } },
-	{ MODKEY|ControlMask,						XK_Right,  spawn,          {.v = brightnessup } },
-	{ MODKEY|ControlMask,						XK_Left, 	 spawn,          {.v = brightnessdown } },
-	{ MODKEY|ControlMask,						XK_Up, 		 spawn,          {.v = volumeup } },
-	{ MODKEY|ControlMask,						XK_Down, 	 spawn,          {.v = volumedown } },
+	{ MODKEY|ShiftMask,             XK_d, 	   spawn,          {.v = tsearchcmd } },
+	{ MODKEY|ControlMask,			XK_Right,  spawn,          {.v = brightnessup } },
+	{ MODKEY|ControlMask,			XK_Left,   spawn,          {.v = brightnessdown } },
+	{ MODKEY|ControlMask,			XK_Up, 	   spawn,          {.v = volumeup } },
+	{ MODKEY|ControlMask,			XK_Down,   spawn,          {.v = volumedown } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -117,8 +116,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_6,                      5)
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
-	// TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_r,      quit,           {1} },
+	{ MODKEY,						XK_9, 	   spawn,          {.v = settingsmenu } },
+	{ MODKEY|ShiftMask,             XK_r,      quit,           {1} }, //Quits dwm (so it restarts by restartsig patch)
 };
 
 /* button definitions */
