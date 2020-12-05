@@ -5,7 +5,7 @@ static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "undefined:size=12", "fontawesome:size=9" };
+static const char *fonts[]          = { "terminus:size=14", "fontawesome:size=9" };
 static const char col_gray1[]       = "#240041";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#c79bff";
@@ -62,7 +62,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] 		= { "j4-dmenu-desktop", "--dmenu", "dmenu -i -fn undefined", NULL };
+static const char *dmenucmd[] 		= { "j4-dmenu-desktop", "--dmenu", "dmenu -i", NULL };
 static const char *termcmd[]  		= { "xfce4-terminal", NULL };
 static const char *tsearchcmd[] 	= {"dmenu_tsearch", NULL };
 static const char *settingsmenu[] 	= {"tmenu", "/home/gabo/tmenus/settings.yaml", NULL };
