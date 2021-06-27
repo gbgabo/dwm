@@ -1,11 +1,13 @@
 /* See LICENSE file for copyright and license details. */
 
+#include "push.c"
+
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int borderpx  = 4;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "terminus:size=14", "fontawesome:size=9" };
+static const char *fonts[]          = { "JetBrainsMonoNL-Medium:size=12", "fontawesome:size=9" };
 static const char col_gray1[]       = "#240041";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#c79bff";
@@ -38,7 +40,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
@@ -62,11 +64,11 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] 		= { "j4-dmenu-desktop", "--dmenu", "dmenu -i", NULL };
-static const char *termcmd[]  		= { "xfce4-terminal", NULL };
+static const char *dmenucmd[] 		= {"j4-dmenu-desktop", "--dmenu", "dmenu -i", NULL };
+static const char *termcmd[]  		= {"xfce4-terminal", NULL };
 static const char *tsearchcmd[] 	= {"dmenu_tsearch", NULL };
 static const char *settingsmenu[] 	= {"tmenu", "/home/gabo/tmenus/settings.yaml", NULL };
-static const char *lockcmd[] 		= {"i3lock-fancy", NULL };
+static const char *lockcmd[] 		= {"slock", NULL };
 
 /* brightness + volume control */
 static const char *brightnessup[] 	= {"brightness-ctrlr.sh", "-s", "5+", NULL };
@@ -78,18 +80,22 @@ static const char *volumedown[] 	= {"volume-ctrlr.sh", "5%-", NULL };
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,            			XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,           			XK_w,	   spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_x,      pushdown,       {0} },
+	{ MODKEY|ShiftMask,             XK_z,      pushup,         {0} },
 	{ MODKEY,                       XK_x,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_z,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_p,      incnmaster,     {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_z,      setmfact,       {.f = -0.05} },
+	{ MODKEY|ControlMask,           XK_x,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_l,      spawn,		   {.v = lockcmd } },
-	// { MODKEY,                       XK_Return, zoom,           {0} },
+//  { MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
