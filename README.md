@@ -52,11 +52,11 @@ In order to display status info in the bar, you can do something
 like this in your .xinitrc:
 
 ```sh
-    while xsetroot -name "`date` `uptime | sed 's/.*,//'`"
-    do
-    	sleep 1
-    done &
-    exec dwm
+while xsetroot -name "`date` `uptime | sed 's/.*,//'`"
+do
+    sleep 1
+done &
+exec dwm
 ```
 
 ## 🔧 Customizing dwm
@@ -68,7 +68,7 @@ and (re)compiling the source code.
 
 ## ⌨️ Current Keybinds
 
-### Keyboard
+**Keyboard**
 
 - `mod + w`: Spawn terminal
 - `mod + b`: Toggle status bar
@@ -96,14 +96,14 @@ and (re)compiling the source code.
 - `mod + ctrl + [up / down]`: Volume control
 - `mod + ???`: Mute volume
 
-### Mouse
+**Mouse**
 
 - `mod + drag with left click`: Move client
 - `mod + drag with right click`: Resize client
 
 ## ➕ Current Patches
 
-### - Essential stuff
+**Essential stuff**
 
 `alwayscenter`
 
@@ -115,7 +115,7 @@ and (re)compiling the source code.
 - allow dwm to self restart, without the need of leaving Xorg and calling dwm again;
 - https://dwm.suckless.org/patches/restartsig/
 
-### - Interface
+**Visual**
 
 `centretitle`
 
@@ -128,7 +128,7 @@ and (re)compiling the source code.
 - there isn't gaps for monocle layout, but the community [finds a way](https://gist.github.com/gbgabo/ef588d7ea043ad5fb60d8369250842b7);
 - https://dwm.suckless.org/patches/vanitygaps/
 
-### - Utilities
+**Utilities**
 
 `focusonnetactive`
 
