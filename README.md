@@ -33,7 +33,7 @@ necessary as root):
 make clean install
 ```
 
-## Running dwm
+## 🔄 Running dwm
 
 Add the following line to your .xinitrc to start dwm using startx:
 
@@ -103,7 +103,7 @@ and (re)compiling the source code.
 
 ## ➕ Current Patches
 
-### essential stuff
+### - Essential stuff
 
 `alwayscenter`
 
@@ -115,7 +115,7 @@ and (re)compiling the source code.
 - allow dwm to self restart, without the need of leaving Xorg and calling dwm again;
 - https://dwm.suckless.org/patches/restartsig/
 
-### interface
+### - Interface
 
 `centretitle`
 
@@ -128,7 +128,7 @@ and (re)compiling the source code.
 - there isn't gaps for monocle layout, but the community [finds a way](https://gist.github.com/gbgabo/ef588d7ea043ad5fb60d8369250842b7);
 - https://dwm.suckless.org/patches/vanitygaps/
 
-### utilities
+### - Utilities
 
 `focusonnetactive`
 
@@ -139,3 +139,11 @@ and (re)compiling the source code.
 
 - `pushup` and `pushdown` provide a way to move clients inside the clients list;
 - https://dwm.suckless.org/patches/push/
+
+## ↗️ Other repositories to check
+
+- [gbgabo/dotfiles](https://github.com/gbgabo/dotfiles): current dotfiles used in my system;
+- [gbgabo/dmenu](https://github.com/gbgabo/dmenu): dmenu fork with center patch and own color theme;
+- [gbgabo/scripts](https://github.com/gbgabo/scripts): personal scripts for volume control, brightness;
+- [TinyTools](https://github.com/TinyToolSH): mainly [tmenu](https://github.com/TinyToolSH/tmenu) and [tsearch](https://github.com/TinyToolSH/tsearch), both used as dmenu wrappers for custom menus and search;
+- [gbgabo/wallpapers](https://github.com/gbgabo/wallpapers): dedicated repository for all my wallpapers;
