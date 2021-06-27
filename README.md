@@ -97,3 +97,40 @@ If you are new to awesomewm, note that tag refers to workspace, and client refer
 - `mod + drag with right click`: Resize client
 
 ## Current Patches
+
+### essential stuff
+
+`alwayscenter`
+
+- makes any new floating window spawn in center of the screen;
+- https://dwm.suckless.org/patches/alwayscenter/
+
+`restartsig`
+
+- allow dwm to self restart, without the need of leaving Xorg and calling dwm again;
+- https://dwm.suckless.org/patches/restartsig/
+
+### interface
+
+`centretitle`
+
+- status bar displays window title at its center;
+- https://dwm.suckless.org/patches/centretitle/
+
+`vanitygaps`
+
+- adds gaps for tiling layout;
+- there isn't gaps for monocle layout, but the community [finds a way](https://gist.github.com/gbgabo/ef588d7ea043ad5fb60d8369250842b7);
+- https://dwm.suckless.org/patches/vanitygaps/
+
+### utilities
+
+`focusonnetactive`
+
+- allows dwm to work with `wmctrl -a`, necessary for twindow;
+- https://dwm.suckless.org/patches/focusonnetactive/
+
+`push`
+
+- `pushup` and `pushdown` provide a way to move clients inside the clients list;
+- https://dwm.suckless.org/patches/push/
