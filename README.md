@@ -96,6 +96,22 @@ and (re)compiling the source code.
 - `mod + ctrl + [up / down]`: Volume control
 - `mod + ???`: Mute volume
 
+`gaps control`
+
+- `mod + alt + [h / l]`: increase/decrease general gaps
+
+- `mod + alt + shift + [h / l]`: increase/decrease outer gaps
+- `mod + alt + ctrl + [h / l]`: increase/decrease inner gaps
+
+- `mod + alt + 0`: toggle gaps
+- `mod + alt + shift + 0`: set default gaps
+
+- `mod + [y / o]`: increase/decrease horizontal inner gaps
+- `mod + alt + [y / o]`: increase/decrease horizontal outer gaps
+
+- `mod + ctrl + [y / o]`: increase/decrease vertical inner gap
+- `mod + shift + [y / o]`: increase/decrease vertical outer gap
+
 **Mouse**
 
 - `mod + drag with left click`: Move client
