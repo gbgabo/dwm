@@ -1138,8 +1138,17 @@ maprequest(XEvent *e)
 void
 monocle(Monitor *m)
 {
-	unsigned int n = 0;
+	unsigned int n = 0, oe = enablegaps;
 	Client *c;
+
+	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
+	if (n == 0)
+		return;
+
+	if (smartgaps == n) {
+		oe = 0; // outer gaps disabled
+	}
+
 	for (c = m->clients; c; c = c->next)
 		if (ISVISIBLE(c))
 			n++;
@@ -1154,10 +1163,10 @@ monocle(Monitor *m)
 						neww = m->ww;
 						newh = m->wh;
 					} else {
-						newx = m->wx + m->gappoh - c->bw;
-						newy = m->wy + m->gappoh - c->bw;
-						neww = m->ww - 2 * (m->gappoh + c->bw);
-						newh = m->wh - 2 * (m->gappoh + c->bw);
+						newx = m->wx + m->gappoh*oe - c->bw;
+						newy = m->wy + m->gappoh*oe - c->bw;
+						neww = m->ww - 2 * (m->gappoh*oe + c->bw);
+						newh = m->wh - 2 * (m->gappoh*oe + c->bw);
 					}
 					applysizehints(c, &newx, &newy, &neww, &newh, 0);
 					if (neww < m->ww)
@@ -1168,6 +1177,7 @@ monocle(Monitor *m)
 				}
 
 }
+
 
 void
 motionnotify(XEvent *e)
