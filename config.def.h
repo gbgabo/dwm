@@ -92,55 +92,64 @@ static const char *volumezero[] 	= {"vctrl ", "0%", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+	// menus
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,             XK_d, 	   spawn,          {.v = tsearchmenu } },
+	{ MODKEY,						XK_9, 	   spawn,          {.v = dialmenu } },
+	{ MODKEY,                       XK_e,  	   spawn,          {.v = focusmenu } },
+	{ MODKEY,			            XK_Tab,    spawn,		   {.v = windowmenu } },
+	{ MODKEY|ShiftMask,             XK_p,  	   spawn,          {.v = passmenu } },
+	// brightness control
+	{ MODKEY|ControlMask,			XK_Right,  spawn,          {.v = brightnessup } },
+	{ MODKEY|ControlMask,			XK_Left,   spawn,          {.v = brightnessdown } },
+	// volume control
+	{ MODKEY|ControlMask,			XK_Up, 	   spawn,          {.v = volumeup } },
+	{ MODKEY|ControlMask,			XK_Down,   spawn,          {.v = volumedown } },
+	// terminal
 	{ MODKEY,           			XK_w,	   spawn,          {.v = termcmd } },
 	{ MODKEY,           			XK_Return, spawn,          {.v = termcmd } },
+	// toggle status bar
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	// lock
+	{ MODKEY,            			XK_l,      spawn,		   {.v = lockcmd } },
+	// screenshot
+	{ MODKEY,			            XK_Print,  spawn,		   {.v = scrotcmd } },
+	// Change vertical split position
+	{ MODKEY|ControlMask,           XK_z,      setmfact,       {.f = -0.05} },
+	{ MODKEY|ControlMask,           XK_x,      setmfact,       {.f = +0.05} },
+	// toggle gaps
+	{ MODKEY,						XK_g,      togglegaps,     {0} },
+	// set default gaps
+	{ MODKEY|Mod1Mask,				XK_g,      defaultgaps,    {0} },
+	// increase/decrease general gaps
+// { MODKEY|Mod1Mask,             	XK_z,      incrgaps,       {.i = +1 } },
+// { MODKEY|Mod1Mask,             	XK_x,  	   incrgaps,       {.i = -1 } },
+	// increase/decrease general outer gaps
+	{ MODKEY|Mod1Mask,				XK_z,      incrogaps,      {.i = +1 } },
+	{ MODKEY|Mod1Mask,    			XK_x,      incrogaps,      {.i = -1 } },
+	// increase/decrease general inner gaps
+	{ MODKEY|Mod1Mask|ControlMask,	XK_z,      incrigaps,      {.i = +1 } },
+	{ MODKEY|Mod1Mask|ControlMask,	XK_x,  	   incrigaps,      {.i = -1 } },
+	// increase/decrease horizontal outer gaps
+	{ MODKEY|Mod1Mask,              XK_Up,     incrohgaps,     {.i = +1 } },
+	{ MODKEY|Mod1Mask,              XK_Down,   incrohgaps,     {.i = -1 } },
+	// increase/decrease horizontal inner gap
+	{ MODKEY|Mod1Mask|ControlMask,	XK_Up,     incrihgaps,     {.i = +1 } },
+	{ MODKEY|Mod1Mask|ControlMask,	XK_Down,   incrihgaps,     {.i = -1 } },
+	// increase/decrease vertical outer gap
+	{ MODKEY|Mod1Mask,             	XK_Left,   incrovgaps,     {.i = +1 } },
+	{ MODKEY|Mod1Mask,             	XK_Right,  incrovgaps,     {.i = -1 } },
+	// increase/decrease vertical inner gap
+	{ MODKEY|Mod1Mask|ControlMask, 	XK_Left,   incrivgaps,     {.i = +1 } },
+	{ MODKEY|Mod1Mask|ControlMask, 	XK_Right,  incrivgaps,     {.i = -1 } },
+//  { MODKEY,                       XK_Return, zoom,           {0} },
+//  { MODKEY,                       XK_Tab,    view,           {0} },
 	// move position of window stack
 	{ MODKEY|ShiftMask,             XK_x,      pushdown,       {0} },
 	{ MODKEY|ShiftMask,             XK_z,      pushup,         {0} },
 	// move focus of window stack
 	{ MODKEY,                       XK_x,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_z,      focusstack,     {.i = -1 } },
-	// ????
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_p,      incnmaster,     {.i = -1 } },
-	// Change vertical split position
-	{ MODKEY|ControlMask,           XK_z,      setmfact,       {.f = -0.05} },
-	{ MODKEY|ControlMask,           XK_x,      setmfact,       {.f = +0.05} },
-	// increase/decrease general gaps
-	{ MODKEY|Mod1Mask,              XK_h,      incrgaps,       {.i = +1 } },
-	{ MODKEY|Mod1Mask,              XK_l,      incrgaps,       {.i = -1 } },
-	// increase/decrease outer gaps
-	{ MODKEY|Mod1Mask|ShiftMask,    XK_h,      incrogaps,      {.i = +1 } },
-	{ MODKEY|Mod1Mask|ShiftMask,    XK_l,      incrogaps,      {.i = -1 } },
-	// increase/decrease inner gaps
-	{ MODKEY|Mod1Mask|ControlMask,  XK_h,      incrigaps,      {.i = +1 } },
-	{ MODKEY|Mod1Mask|ControlMask,  XK_l,      incrigaps,      {.i = -1 } },
-	// toggle gaps
-	{ MODKEY|Mod1Mask,              XK_0,      togglegaps,     {0} },
-	// set default gaps
-	{ MODKEY|Mod1Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
-	// increase/decrease horizontal inner gap
-	{ MODKEY,                       XK_y,      incrihgaps,     {.i = +1 } },
-	{ MODKEY,                       XK_o,      incrihgaps,     {.i = -1 } },
-	//  increase/decrease vertical inner gap
-	{ MODKEY|ControlMask,           XK_y,      incrivgaps,     {.i = +1 } },
-	{ MODKEY|ControlMask,           XK_o,      incrivgaps,     {.i = -1 } },
-	// increase/decrease horizontal outer gaps
-	{ MODKEY|Mod1Mask,              XK_y,      incrohgaps,     {.i = +1 } },
-	{ MODKEY|Mod1Mask,              XK_o,      incrohgaps,     {.i = -1 } },
-	// increase/decrease vertical outer gap
-	{ MODKEY|ShiftMask,             XK_y,      incrovgaps,     {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } },
-	// lock
-	{ MODKEY|ShiftMask,             XK_l,      spawn,		   {.v = lockcmd } },
-	// opened windows
-	{ MODKEY,			            XK_Tab,    spawn,		   {.v = windowmenu } },
-	// screenshot
-	{ MODKEY,			            XK_Print,  spawn,		   {.v = scrotcmd } },
-//  { MODKEY,                       XK_Return, zoom,           {0} },
-//  { MODKEY,                       XK_Tab,    view,           {0} },
 	// close window
 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
 	// set layouts - tile, floating, monocle
@@ -150,28 +159,20 @@ static Key keys[] = {
 
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	
+	// view all tags
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+	// make windoow sticky
+	{ MODKEY,             			XK_s,      tag,            {.ui = ~0 } },
+	// ????
+	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
+	{ MODKEY,                       XK_p,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	// tsearch menu
-	{ MODKEY|ShiftMask,             XK_d, 	   spawn,          {.v = tsearchmenu } },
-	// brightness control
-	{ MODKEY|ControlMask,			XK_Right,  spawn,          {.v = brightnessup } },
-	{ MODKEY|ControlMask,			XK_Left,   spawn,          {.v = brightnessdown } },
-	// volume control
-	{ MODKEY|ControlMask,			XK_Up, 	   spawn,          {.v = volumeup } },
-	{ MODKEY|ControlMask,			XK_Down,   spawn,          {.v = volumedown } },
-	// ????
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
 	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 1  } },
-	// pass menu
-	{ MODKEY|ShiftMask,             XK_p,  	   spawn,          {.v = passmenu } },
-	{ MODKEY,                       XK_e,  	   spawn,          {.v = focusmenu } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -180,7 +181,6 @@ static Key keys[] = {
 	TAGKEYS(                        XK_6,                      5)
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
-	{ MODKEY,						XK_9, 	   spawn,          {.v = dialmenu } },
 	{ MODKEY|ShiftMask,             XK_r,      quit,           {1} }, //Quits dwm (so it restarts by restartsig patch)
 };
 
