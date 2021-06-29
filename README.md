@@ -70,66 +70,134 @@ and (re)compiling the source code.
 
 **Keyboard**
 
-- `mod + w`: Spawn terminal
-- `mod + b`: Toggle status bar
-- `mod + [1-9]`: Switch to tag [1-9]
-- `mod + shift + l`: lock screen
+## `navigation`
 
-`window navigation`
+|          Bind           |            Command            |
+| :---------------------: | :---------------------------: |
+|      `mod + [1-9]`      |      Switch to tag [1-9]      |
+|        `mod + 0`        |         View all tags         |
+|  `mod + shift + [1-9]`  |   Move client to tag [1-9]    |
+|     `mod + [z / x]`     |  Move focus of window stack   |
+| `mod + shift + [z / x]` | Move position of window stack |
+|    `mod + shift + q`    |          Kill client          |
 
+<!-- - `mod + [1-9]`: Switch to tag [1-9]
+- `mod + 0`: View all tags
 - `mod + shift + [1-9]`: Move client to tag [1-9]
 - `mod + [z / x]`: Move focus of window stack
 - `mod + shift + [z / x]`: Move position of window stack
+- `mod + shift + q`: kill client -->
 
-`quick menus`
+## `layouts`
 
-- `mod + d`: Spawn j4-dmenu-desktop (an application menu)
-- `mod + shift + d`: Spawn dmenu_tsearch ()
-- `mod + shift + 9`: Spawn dial menu ()
-- `mod + shift + e`: Spawn focus menu ()
-- `mod + shift + tab`: Spawn dmenu_twindow ()
-- `mod + shift + p`: Spawn pass menu ()
+|         Bind          |              Command              |
+| :-------------------: | :-------------------------------: |
+|       `mod + t`       |        Set layout to tile         |
+|       `mod + f`       |      Set layout to floating       |
+|       `mod + m`       |       Set layout to monocle       |
+|     `mod + space`     | Alternate two latest used layouts |
+| `mod + shift + space` |     Toggle floating on client     |
+|       `mod + s`       |        Make window sticky         |
 
-`media controls`
+<!-- - `mod + t`: set layout to tile
+- `mod + f`: set layout to floating
+- `mod + m`: set layout to monocle
 
-- `mod + ctrl + [left / right]`: Brigthness control
+- `mod + space`: alternate two latest used layouts
+- `mod + shift + space`: toggle floating on client
+- `mod + s`: make window sticky -->
+
+## `commands`
+
+|     Bind      |      Command      |
+| :-----------: | :---------------: |
+|   `mod + w`   |  Spawn terminal   |
+|   `mod + b`   | Toggle status bar |
+| `mod + print` |    Screenshot     |
+|   `mod + r`   |    Restart dwm    |
+
+<!-- - `mod + ctrl + [left / right]`: brightness control using [personal script](https://github.com/gbgabo/scripts)
+- `mod + ctrl + [up / down]`: volume control using [personal script](https://github.com/gbgabo/scripts)
+- `mod + w`: Spawn terminal
+- `mod + b`: Toggle status bar
+- `mod + l`: lock screen
+- `mod + print`: screenshot
+- `mod + r`: restart dwm -->
+
+## `menus`
+
+|        Bind         |                     Menu                     |
+| :-----------------: | :------------------------------------------: |
+|      `mod + d`      | Spawn application laucher (j4-dmenu-desktop) |
+|  `mod + shift + d`  |       Spawn web search (dmenu_tsearch)       |
+|  `mod + shift + 9`  |        Spawn dial menu (custom tmenu)        |
+|  `mod + shift + e`  |       Spawn focus menu (custom tmenu)        |
+| `mod + shift + tab` |  Spawn opened windows menu (dmenu_twindow)   |
+|  `mod + shift + p`  |        Spawn password menu (passmenu)        |
+
+<!-- - `mod + d`: Spawn application laucher (j4-dmenu-desktop)
+- `mod + shift + d`: Spawn web search (dmenu_tsearch)
+- `mod + shift + 9`: Spawn dial menu (custom tmenu)
+- `mod + shift + e`: Spawn focus menu (custom tmenu)
+- `mod + shift + tab`: Spawn opened windows menu (dmenu_twindow)
+- `mod + shift + p`: Spawn pass menu () -->
+
+## `media controls`
+
+|             Bind              |                                    Command                                    |
+| :---------------------------: | :---------------------------------------------------------------------------: |
+| `mod + ctrl + [left / right]` | Brightness control using [personal script](https://github.com/gbgabo/scripts) |
+|  `mod + ctrl + [up / down]`   |   Volume control using [personal script](https://github.com/gbgabo/scripts)   |
+|          `mod + ???`          |                                  Mute volume                                  |
+|          `mod + ???`          |                               Play/pause media                                |
+
+<!-- - `mod + ctrl + [left / right]`: Brigthness control
 - `mod + ctrl + [up / down]`: Volume control
-- `mod + ???`: Mute volume
+- `mod + ???`: Mute volume -->
 
-`gaps control`
+## `gaps control`
 
-- `mod + alt + [h / l]`: increase/decrease general gaps
+|                Bind                 |                 Command                 |
+| :---------------------------------: | :-------------------------------------: |
+|              `mod + g`              |               toggle gaps               |
+|           `mod + alt + g`           |            set default gaps             |
+|        `mod + alt + [z / x]`        |  increase/decrease general outer gaps   |
+|    `mod + alt + ctrl + [z / x]`     |  increase/decrease general inner gaps   |
+|      `mod + alt + [up / down]`      | increase/decrease horizontal outer gaps |
+|  `mod + alt + ctrl + [up / down]`   | increase/decrease horizontal inner gaps |
+|    `mod + alt + [left / right]`     |  increase/decrease vertical outer gaps  |
+| `mod + alt + ctrl + [left / right]` |  increase/decrease vertical inner gap   |
 
-- `mod + alt + shift + [h / l]`: increase/decrease outer gaps
-- `mod + alt + ctrl + [h / l]`: increase/decrease inner gaps
+<!-- - `mod + g`: toggle gaps
+- `mod + alt + g`: set default gaps
 
-- `mod + alt + 0`: toggle gaps
-- `mod + alt + shift + 0`: set default gaps
+- `mod + alt + [z / x]`: increase/decrease general outer gaps
+- `mod + alt + ctrl + [z / x]`: increase/decrease general inner gaps
 
-- `mod + [y / o]`: increase/decrease horizontal inner gaps
-- `mod + alt + [y / o]`: increase/decrease horizontal outer gaps
+- `mod + alt + [up / down]`: increase/decrease horizontal outer gaps
+- `mod + alt + ctrl + [up / down]`: increase/decrease horizontal inner gap
 
-- `mod + ctrl + [y / o]`: increase/decrease vertical inner gap
-- `mod + shift + [y / o]`: increase/decrease vertical outer gap
+- `mod + alt + [left / right]`: increase/decrease vertical outer gaps
+- `mod + alt + ctrl + [left / right]`: increase/decrease vertical inner gap -->
 
-**Mouse**
+<!-- - **Mouse**
 
 - `mod + drag with left click`: Move client
-- `mod + drag with right click`: Resize client
+- `mod + drag with right click`: Resize client -->
 
 ## ➕ Current Patches
 
 **Essential stuff**
 
-`alwayscenter`
-
-- makes any new floating window spawn in center of the screen;
-- https://dwm.suckless.org/patches/alwayscenter/
-
 `restartsig`
 
 - allow dwm to self restart, without the need of leaving Xorg and calling dwm again;
 - https://dwm.suckless.org/patches/restartsig/
+
+`alwayscenter`
+
+- makes any new floating window spawn in center of the screen;
+- https://dwm.suckless.org/patches/alwayscenter/
 
 **Visual**
 
