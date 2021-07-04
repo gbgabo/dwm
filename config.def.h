@@ -47,8 +47,8 @@ static const Rule rules[] = {
 
 /* layout(s) */
 static const float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
-static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int nmaster     = 1;   /* number of clients in master area */
+static const int resizehints = 1;   /* 1 means respect size hints in tiled resizals */
 
 /* mouse scroll resize */
 static const int scrollsensetivity = 30; /* 1 means resize window by 1 pixel for each scroll event */
@@ -75,6 +75,8 @@ static const Layout layouts[] = {
 static const char *termcmd[]  		= {"xfce4-terminal", NULL };
 static const char *lockcmd[] 		= {"xscreensaver-command", "-lock", NULL };
 static const char *scrotcmd[] 		= {"scrot", "/home/gabo/Pictures/screenshots/%Y-%m-%d-%H_%M_%S.jpg", NULL };
+static const char scratchpadname[] 	= "scratchpad";
+static const char *scratchpadcmd[] 	= { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
 /* menus */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
@@ -109,8 +111,9 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,			XK_Up, 	   spawn,          {.v = volumeup } },
 	{ MODKEY|ControlMask,			XK_Down,   spawn,          {.v = volumedown } },
 	// terminal
-	{ MODKEY,           			XK_w,	   spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,           	XK_w,	   spawn,          {.v = termcmd } },
 	{ MODKEY,           			XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                 		XK_w,  	   togglescratch,  {.v = scratchpadcmd } },
 	// toggle status bar
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	// lock
@@ -200,21 +203,21 @@ static const int scrollargs[][2] = {
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static Button buttons[] = {
 	/* click                event mask      button          function        argument */
-	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
-	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
-	{ ClkClientWin,         MODKEY,         Button4,        resizemousescroll, {.v = &scrollargs[0]} },
-	{ ClkClientWin,         MODKEY,         Button5,        resizemousescroll, {.v = &scrollargs[1]} },
-	{ ClkClientWin,         MODKEY,         Button6,        resizemousescroll, {.v = &scrollargs[2]} },
-	{ ClkClientWin,         MODKEY,         Button7,        resizemousescroll, {.v = &scrollargs[3]} },
-	{ ClkTagBar,            0,              Button1,        view,           {0} },
-	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
-	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	{ ClkLtSymbol,          0,              Button1,        setlayout,      	{0} },
+	{ ClkLtSymbol,          0,              Button3,        setlayout,      	{.v = &layouts[2]} },
+	{ ClkWinTitle,          0,              Button2,        zoom,           	{0} },
+	{ ClkStatusText,        0,              Button2,        spawn,          	{.v = termcmd } },
+	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      	{0} },
+	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, 	{0} },
+	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    	{0} },
+	{ ClkClientWin,         MODKEY,         Button4,        resizemousescroll, 	{.v = &scrollargs[0]} },
+	{ ClkClientWin,         MODKEY,         Button5,        resizemousescroll, 	{.v = &scrollargs[1]} },
+	{ ClkClientWin,         MODKEY,         Button6,        resizemousescroll, 	{.v = &scrollargs[2]} },
+	{ ClkClientWin,         MODKEY,         Button7,        resizemousescroll, 	{.v = &scrollargs[3]} },
+	{ ClkTagBar,            0,              Button1,        view,           	{0} },
+	{ ClkTagBar,            0,              Button3,        toggleview,     	{0} },
+	{ ClkTagBar,            MODKEY,         Button1,        tag,            	{0} },
+	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      	{0} },
 };
 
 

@@ -224,6 +224,16 @@ and (re)compiling the source code.
 - `pushup` and `pushdown` provide a way to move clients inside the clients list;
 - https://dwm.suckless.org/patches/push/
 
+`tapresize`
+
+- Allows to resize windows with touchpad;
+- https://dwm.suckless.org/patches/tapresize/
+
+`scratchpad`
+
+- Allows to spawn or restore a floating terminal window;
+- https://dwm.suckless.org/patches/scratchpad/
+
 ## ↗️ Other repositories to check
 
 - [gbgabo/dotfiles](https://github.com/gbgabo/dotfiles): current dotfiles used in my system;
