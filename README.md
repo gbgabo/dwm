@@ -109,12 +109,13 @@ and (re)compiling the source code.
 
 ## `commands`
 
-|     Bind      |      Command      |
-| :-----------: | :---------------: |
-|   `mod + w`   |  Spawn terminal   |
-|   `mod + b`   | Toggle status bar |
-| `mod + print` |    Screenshot     |
-|   `mod + r`   |    Restart dwm    |
+|       Bind        |          Command          |
+| :---------------: | :-----------------------: |
+|     `mod + w`     | Spawn scratchpad terminal |
+| `mod + shift + w` |    Spawn new terminal     |
+|     `mod + b`     |     Toggle status bar     |
+|   `mod + print`   |        Screenshot         |
+|     `mod + r`     |        Restart dwm        |
 
 <!-- - `mod + ctrl + [left / right]`: brightness control using [personal script](https://github.com/gbgabo/scripts)
 - `mod + ctrl + [up / down]`: volume control using [personal script](https://github.com/gbgabo/scripts)
