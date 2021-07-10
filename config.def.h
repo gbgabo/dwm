@@ -210,10 +210,12 @@ static Button buttons[] = {
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      	{0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, 	{0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    	{0} },
-	{ ClkClientWin,         MODKEY,         Button4,        resizemousescroll, 	{.v = &scrollargs[0]} },
-	{ ClkClientWin,         MODKEY,         Button5,        resizemousescroll, 	{.v = &scrollargs[1]} },
-	{ ClkClientWin,         MODKEY,         Button6,        resizemousescroll, 	{.v = &scrollargs[2]} },
-	{ ClkClientWin,         MODKEY,         Button7,        resizemousescroll, 	{.v = &scrollargs[3]} },
+	// Vertical Scroll
+	{ ClkClientWin,         MODKEY,         Button4,        resizemousescroll, 	{.v = &scrollargs[1]} },
+	{ ClkClientWin,         MODKEY,         Button5,        resizemousescroll, 	{.v = &scrollargs[0]} },
+	// Horizontal Scroll
+	{ ClkClientWin,         MODKEY,         Button6,        resizemousescroll, 	{.v = &scrollargs[3]} },
+	{ ClkClientWin,         MODKEY,         Button7,        resizemousescroll, 	{.v = &scrollargs[2]} },
 	{ ClkTagBar,            0,              Button1,        view,           	{0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     	{0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            	{0} },
