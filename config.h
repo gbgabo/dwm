@@ -122,7 +122,7 @@ static const char *brightnessup[] 	= {"bctrl", "5+", NULL };
 static const char *brightnessdown[] = {"bctrl", "5-", NULL };
 static const char *volumeup[] 		= {"vctrl", "5+", NULL };
 static const char *volumedown[] 	= {"vctrl", "5-", NULL };
-static const char *volumezero[] 	= {"vctrl", "0%", NULL };
+static const char *volumezero[] 	= {"vctrl ", "0%", NULL };
 
 
 static Key keys[] = {

@@ -65,7 +65,24 @@
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel }; /* color schemes */
+enum {
+  SchemeNorm,
+  SchemeSel,
+  SchemeActive,
+  SchemeStatus,
+  SchemeInfoNorm,
+  SchemeInfoSel,
+  ArrowNorm,
+  ArrowNormWhite,
+  ArrowNormAlt,
+  ArrowSel,
+  ArrowSelWhite,
+  ArrowSelAlt,
+  ArrowBg,
+  ArrowActive,
+  ArrowActiveAlt,
+  ArrowFullActive
+}; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
@@ -742,12 +759,60 @@ drawbar(Monitor *m)
 	unsigned int i, occ = 0, urg = 0;
 	Client *c;
 
+	int sx = 0;
 	/* draw status first so it can be overdrawn by tags later */
 	if (m == selmon) { /* status is only drawn on selected monitor */
-		drw_setscheme(drw, scheme[SchemeNorm]);
-		tw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
-		drw_text(drw, m->ww - tw, 0, tw, bh, 0, stext, 0);
-	}
+    drw_setscheme(drw, scheme[SchemeStatus]);
+    // tw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
+    // drw_text(drw, m->ww - tw, 0, tw, bh, 0, stext, 0);
+
+    const char s[] = "|";
+    char statusText[1000];
+    strcpy(statusText, stext);
+
+    char *token = strtok(statusText, s);
+    int count = 0;
+    while (token != NULL) {
+      if (count % 2 == 0) {
+        tw += s_arrowpx + TEXTW(token) - lrpad;
+      } else {
+        tw += s_arrowpx + TEXTW(token) - lrpad;
+      }
+
+      token = strtok(0, s);
+      count++;
+    }
+
+    sx = m->ww - tw;
+
+    strcpy(statusText, stext);
+    token = strtok(statusText, s);
+    count = 0;
+    while (token != NULL) {
+      if (count % 2 != 0) {
+        drw_setscheme(drw, scheme[ArrowNorm]);
+        drw_arrow(drw, sx, 0, s_arrowpx, bh, 0, 1);
+        sx += s_arrowpx;
+
+        drw_setscheme(drw, scheme[ArrowSelWhite]);
+        drw_text(drw, sx, 0, tw, bh, 0, token, 0);
+        sx += TEXTW(token) - lrpad;
+      } else {
+        drw_setscheme(
+            drw,
+            scheme[m->sel->name != NULL && count == 0 ? ArrowNorm : ArrowBg]);
+        drw_arrow(drw, sx, 0, s_arrowpx, bh, count == 0 ? 1 : 0, 1);
+        sx += s_arrowpx;
+
+        drw_setscheme(drw, scheme[SchemeStatus]);
+        drw_text(drw, sx, 0, tw, bh, 0, token, 0);
+        sx += TEXTW(token) - lrpad;
+      }
+
+      token = strtok(0, s);
+      count++;
+    }
+  }
 
 	for (c = m->clients; c; c = c->next) {
 		occ |= c->tags;
@@ -757,6 +822,21 @@ drawbar(Monitor *m)
 	x = 0;
 	for (i = 0; i < LENGTH(tags); i++) {
 		w = TEXTW(tags[i]);
+		if (i > 0) {
+			if (m->tagset[m->seltags] & 1 << i) {
+				drw_setscheme(drw, scheme[ArrowSel]);
+				drw_arrow(drw, x, 0, 12, bh, 1, 1);
+				x += 12;
+			} else if (m->tagset[m->seltags] & 1 << (i - 1)) {
+				drw_setscheme(drw, scheme[ArrowNorm]);
+				drw_arrow(drw, x, 0, 12, bh, 1, 1);
+				x += 12;
+			} else {
+				drw_setscheme(drw, scheme[ArrowBg]);
+				drw_arrow(drw, x, 0, 12, bh, 1, 1);
+				x += 12;
+			}
+		}
 		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
 		if (occ & 1 << i)
@@ -765,6 +845,7 @@ drawbar(Monitor *m)
 				urg & 1 << i);
 		x += w;
 	}
+	drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
 	w = blw = TEXTW(m->ltsymbol);
 	drw_setscheme(drw, scheme[SchemeNorm]);
 	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
